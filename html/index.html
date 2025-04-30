@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - Início</title>
+    <link rel="stylesheet" href="/search/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Animação de fade suave */
+      body {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      body.loaded {
+        opacity: 1;
+      }
+
+      /* Modo escuro */
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
+      /* Ajustes para seções no modo escuro */
+      body.dark-mode section {
+        background-color: #1e1e1e;
+        color: #f4f4f4;
+      }
+
+      /* Estilos para o botão de modo escuro */
+      #toggle-dark {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f4f4f4;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode #toggle-dark {
+        background-color: #f4f4f4;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Emergia e Sustentabilidade</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="sustentabilidade.html">No Campus</a></li>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+    <main>
+      <section class="intro">
+        <h2>O que é Emergia?</h2>
+        <p>
+          Emergia é a energia previamente utilizada, direta ou indiretamente,
+          para produzir um bem ou serviço. Ela considera todos os insumos
+          envolvidos: energia solar, materiais, trabalho humano e processos
+          naturais.
+        </p>
+        <p>
+          Segundo Odum (1996), "emergia é a energia de uma forma (geralmente
+          solar) utilizada na transformação de um recurso ou produto".
+        </p>
+        <img
+          src="img/emergia_vs_energia.png"
+          alt="Infográfico comparando emergia e energia convencional"
+        />
+      </section>
+      <section class="grafico">
+        <h2>Comparativo Visual</h2>
+        <canvas id="graficoEmergia" width="400" height="200"></canvas>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      // Modo escuro
+      const toggleBtn = document.getElementById("toggle-dark");
+      const body = document.body;
+
+      // Verifica se o modo escuro está ativado no localStorage
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const isDarkMode = body.classList.toggle("dark-mode");
+        // Salva a preferência do usuário
+        localStorage.setItem("dark-mode", isDarkMode);
+      });
+
+      // Gráfico de comparação
+      const ctx = document.getElementById("graficoEmergia");
+      if (ctx) {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Data Center Tradicional", "Data Center na Nuvem"],
+            datasets: [
+              {
+                label: "Emergia (em seJ)",
+                data: [1000, 600],
+                backgroundColor: ["#40916c", "#2d6a4f"],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: true },
+              title: {
+                display: true,
+                text: "Comparativo de Emergia",
+              },
+            },
+          },
+        });
+      }
+
+      // Adiciona a classe 'loaded' ao carregar a página para o efeito fade
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+      });
+    </script>
+  </body>
+</html>

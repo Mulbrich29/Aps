@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - Aplicações</title>
+    <link rel="stylesheet" href="/search/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        transition: background-color 0.5s, color 0.5s;
+      }
+
+      body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+
+      header {
+        background-color: #40916c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      header nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      header nav ul li {
+        margin: 0 10px;
+      }
+
+      header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      section {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      section.fade-in {
+        opacity: 1;
+      }
+
+      footer {
+        background-color: #40916c;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      body.dark-mode section {
+        background-color: #1e1e1e;
+      }
+
+      #toggle-dark {
+        margin-top: 10px;
+        background-color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Aplicações Práticas</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="sustentabilidade.html">No Campus</a></li>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+      <section>
+        <h2>Estudo de Caso</h2>
+        <p>
+          Altere os valores dos data centers para comparar a eficiência
+          emergética.
+        </p>
+        <label for="tradicional">Data Center Tradicional:</label>
+        <input type="number" id="tradicional" value="1000" min="0" />
+        <label for="nuvem">Data Center na Nuvem:</label>
+        <input type="number" id="nuvem" value="600" min="0" />
+        <button id="updateChart">Atualizar Gráfico</button>
+        <canvas id="graficoEmergia" width="400" height="200"></canvas>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      // Fade-in ao rolar
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll("section");
+        const fadeInSections = () => {
+          sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < window.innerHeight) {
+              section.classList.add("fade-in");
+            }
+          });
+        };
+        fadeInSections();
+        window.addEventListener("scroll", fadeInSections);
+      });
+
+      // Gráfico
+      let ctx = document.getElementById("graficoEmergia").getContext("2d");
+      let grafico = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Data Center Tradicional", "Data Center na Nuvem"],
+          datasets: [
+            {
+              label: "Emergia (em seJ)",
+              data: [1000, 600],
+              backgroundColor: ["#40916c", "#2d6a4f"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            title: {
+              display: true,
+              text: "Comparativo de Emergia",
+            },
+          },
+        },
+      });
+
+      document
+        .getElementById("updateChart")
+        .addEventListener("click", function () {
+          const tradicionalValue = document.getElementById("tradicional").value;
+          const nuvemValue = document.getElementById("nuvem").value;
+          grafico.data.datasets[0].data = [tradicionalValue, nuvemValue];
+          grafico.update();
+        });
+
+      // Modo escuro com persistência
+      const body = document.body;
+      const toggleBtn = document.getElementById("toggle-dark");
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+      });
+    </script>
+  </body>
+</html>
