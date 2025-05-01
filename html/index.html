@@ -4,36 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emergia - Início</title>
-    <link rel="stylesheet" href="/search/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
     <style>
-      /* Animação de fade suave */
       body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #000;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        background-color: #40916c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      section {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
+          transform 0.6s ease-out;
         opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+        transform: translateY(20px);
       }
 
-      body.loaded {
+      section.fade-in {
         opacity: 1;
+        transform: translateY(0);
       }
 
-      /* Modo escuro */
-      body.dark-mode {
-        background-color: #121212;
-        color: #f4f4f4;
+      footer {
+        background-color: #40916c;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
       }
 
-      /* Ajustes para seções no modo escuro */
-      body.dark-mode section {
-        background-color: #1e1e1e;
-        color: #f4f4f4;
-      }
-
-      /* Estilos para o botão de modo escuro */
       #toggle-dark {
         position: absolute;
         top: 20px;
@@ -46,6 +81,16 @@
         font-weight: bold;
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode section {
+        background-color: #1e1e1e;
+        color: #f4f4f4;
       }
 
       body.dark-mode #toggle-dark {
@@ -67,8 +112,9 @@
       </nav>
       <button id="toggle-dark">🌙 Modo Escuro</button>
     </header>
+
     <main>
-      <section class="intro">
+      <section>
         <h2>O que é Emergia?</h2>
         <p>
           Emergia é a energia previamente utilizada, direta ou indiretamente,
@@ -85,15 +131,17 @@
           alt="Infográfico comparando emergia e energia convencional"
         />
       </section>
-      <section class="grafico">
+      <section>
         <h2>Comparativo Visual</h2>
         <canvas id="graficoEmergia" width="400" height="200"></canvas>
       </section>
     </main>
+
     <footer>
       <p>&copy; 2025 - APS PWR | UNIP</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       // Modo escuro
       const toggleBtn = document.getElementById("toggle-dark");
@@ -102,46 +150,66 @@
       // Verifica se o modo escuro está ativado no localStorage
       if (localStorage.getItem("dark-mode") === "true") {
         body.classList.add("dark-mode");
+        toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
+      } else {
+        toggleBtn.textContent = "🌙 Modo Escuro"; // Se não estiver no modo escuro
       }
 
       toggleBtn.addEventListener("click", () => {
         const isDarkMode = body.classList.toggle("dark-mode");
-        // Salva a preferência do usuário
         localStorage.setItem("dark-mode", isDarkMode);
+
+        // Atualiza o texto do botão conforme o modo
+        if (isDarkMode) {
+          toggleBtn.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+        } else {
+          toggleBtn.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+        }
       });
 
-      // Gráfico de comparação
-      const ctx = document.getElementById("graficoEmergia");
-      if (ctx) {
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: ["Data Center Tradicional", "Data Center na Nuvem"],
-            datasets: [
-              {
-                label: "Emergia (em seJ)",
-                data: [1000, 600],
-                backgroundColor: ["#40916c", "#2d6a4f"],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-              title: {
-                display: true,
-                text: "Comparativo de Emergia",
+      // Gráfico de comparação - garantir que o gráfico seja desenhado após o carregamento da página
+      window.addEventListener("load", () => {
+        const ctx = document.getElementById("graficoEmergia");
+        if (ctx) {
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Data Center Tradicional", "Data Center na Nuvem"],
+              datasets: [
+                {
+                  label: "Emergia (em seJ)",
+                  data: [1000, 600],
+                  backgroundColor: ["#40916c", "#2d6a4f"],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true },
+                title: {
+                  display: true,
+                  text: "Comparativo de Emergia",
+                },
               },
             },
-          },
-        });
-      }
-
-      // Adiciona a classe 'loaded' ao carregar a página para o efeito fade
-      window.addEventListener("load", () => {
-        document.body.classList.add("loaded");
+          });
+        }
       });
+
+      // Função para aplicar a classe fade-in nas seções
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
     </script>
   </body>
 </html>

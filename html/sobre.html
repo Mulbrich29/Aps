@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - Sobre</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #000;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        background-color: #40916c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      section {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
+          transform 0.6s ease-out;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      section.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      footer {
+        background-color: #40916c;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      #toggle-dark {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f4f4f4;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode section {
+        background-color: #1e1e1e;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode #toggle-dark {
+        background-color: #f4f4f4;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sobre Emergia</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="sustentabilidade.html">No Campus</a></li>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+      <section>
+        <h2>Princípios Fundamentais</h2>
+        <p>
+          Emergia é medida em unidades equivalentes de energia solar (seJ),
+          permitindo comparar diferentes recursos de maneira padronizada. Isso
+          facilita a identificação de processos sustentáveis e eficientes.
+        </p>
+        <p>
+          É uma ferramenta poderosa para avaliar a sustentabilidade de sistemas
+          complexos, sejam eles ecológicos ou tecnológicos.
+        </p>
+      </section>
+
+      <section>
+        <h2>Unidade de Medida</h2>
+        <p>
+          O valor emergético de um recurso é expresso em seJ (joules de energia
+          solar equivalente), integrando todos os tipos de energia usados na
+          cadeia produtiva.
+        </p>
+      </section>
+
+      <section>
+        <h2>Como a Emergia Pode Ser Aplicada?</h2>
+        <p>
+          Emergia pode ser aplicada para otimizar a utilização de recursos em
+          sistemas produtivos e naturais, considerando não apenas a quantidade
+          de energia direta consumida, mas também toda a energia incorporada nos
+          processos.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      // Modo escuro com persistência no localStorage
+      const toggle = document.getElementById("toggle-dark");
+      const prefersDark = localStorage.getItem("dark-mode") === "true";
+
+      if (prefersDark) {
+        document.body.classList.add("dark-mode");
+      }
+
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+
+        // Atualiza o texto do botão conforme o modo
+        if (isDark) {
+          toggle.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+        } else {
+          toggle.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+        }
+      });
+
+      // Fade-in das seções
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
+    </script>
+  </body>
+</html>
