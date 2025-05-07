@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - No Campus</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      header {
+        background-color: #40916c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      section {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
+          transform 0.6s ease-out;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      section.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode section {
+        background-color: #1e1e1e;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode #toggle-dark {
+        background-color: #f4f4f4;
+        color: #000;
+      }
+      #equipamento{
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #555;
+      }
+      select{
+         position: relative;
+         font-size: 1rem;
+         line-height: 1.5;
+         cursor: pointer;
+         user-select: none;
+         width: 100%;
+         height: auto;
+         padding: 0.75rem 1.25rem;
+         border: 1px solid #555;
+         outline: none;
+         border-radius: 0.25rem;
+         padding: 9.6px 16px;
+         margin: 8px 0px 16px;   
+         transition: all 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sustentabilidade no Campus</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="nocampus.html  ">No Campus</a></li>
+          <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+        <!-- Título centralizado -->
+        <div class="position-absolute top-50 start-50 translate-middle z-2">
+          <h2 class="text-white fw-bold display-6 pb-1 px-3">
+            Calculadora de Emergia
+          </h2>
+        </div>
+      </section>
+
+      <!--  A Calculadora de Emergia e o Novo Estilo de Vida Sustentável -->
+      <section class="my-5">
+        <div>
+          <div class="container">
+            <div class="bg-white rounded-4 shadow-lg p-4 p-md-5">
+              <h2 class="fw-bold mb-3 text-center text-success">
+                A Calculadora de Emergia e o Novo Estilo de Vida Sustentável
+              </h2>
+              <p class="text-muted mb-4">
+                Vivemos em uma era em que pequenas escolhas tem grandes
+                impactos. A <b>Calculadora de Emergia</b> surge como uma aliada
+                no dia a dia de quem deseja viver de forma mais consiente,
+                transformando hábitos simples em ações sustentáveis
+              </p>
+              <p class="text-muted mb-4">
+                Ao utilizar dessa ferramenta, você passa a compreender, de forma
+                prática e humanizada, o <b>consumo energético real</b>
+                de aparelhos comuns, como notebooks, geladeiras e televisões.
+                Mais do que apenas números ele traduz o impacto ambiental desses
+                usos em termos acessíveis, revelando o caminho que a energia
+                percorre desde sua origem até o descarte final dos produtos
+              </p>
+              <p class="text-muted mb-4">
+                Com base nas Informações inseridas, a calculadora oferece
+                <b>dicas personalizadas</b> para reduzir esse consumo e
+                minimizar danos ao meio ambiente. Assim ela deixa de ser uma
+                ferramenta de cálculo e se torna uma ponte para um
+                <b>novo lifestyle</b> - mais consiente, equilibrado e
+                responsável
+              </p>
+              <p class="text-muted mb-4">
+                Integrar a calculadora de emergia à sua rotina significa
+                despertar para um novo olhar sobre o consumo e as escolhas
+                diárias. Significa assumir o controle de sua pegada ecológica e
+                fazer parte de uma geração que entende que sustentabilidade
+                começa dentro de casa - e se reflete no mundo inteiro.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Calculadora -->
+      <section>
+        <div class="container py-5">
+          <div
+            class="bg-white rounded-4 shadow p-5 mx-auto"
+            style="max-width: 500px"
+          >
+            <h3 class="text-success fw-bold mb-4 text-center">
+              Calculadora de Emergia
+            </h3>
+            <form id="form-calculadora">
+              <div class="mb-3">
+                <label for="equipamento" class="form-label"
+                  >Escolha o equipamento:</label
+                >
+                <select class="form-select" id="equipamento" required>
+                  <option value="">Selecione</option>
+                  <option value="notebook">Notebook</option>
+                  <option value="geladeira">Geladeira</option>
+                  <option value="tv">TV</option>
+                  <option value="micro-ondas">Micro-ondas</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="tempo" class="form-label"
+                  >Tempo de uso diário (em horas):</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="tempo"
+                  placeholder="Ex: 6"
+                  min="0"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-success w-100">
+                Calcular
+              </button>
+            </form>
+
+            <div class="resultado mt-5" id="resultado">
+              <h5 class="fw-bold text-success">Resultado:</h5>
+              <p id="resumo"></p>
+              <h6 class="fw-bold mt-4">Dicas Sustentáveis:</h6>
+              <ul id="dicas" class="text-muted"></ul>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          const emergiaBase = {
+            notebook: 1000, // valor fictício em sej (Solar Emjoules)
+            geladeira: 2500,
+            tv: 1500,
+          };
+
+          const dicasPorEquipamento = {
+            notebook: [
+              "Desligue o notebook quando não estiver usando.",
+              "Use o modo economia de energia.",
+              "Reduza o brilho da tela.",
+            ],
+            geladeira: [
+              "Evite abrir a porta da geladeira com frequência.",
+              "Mantenha as borrachas da porta em bom estado.",
+              "Não coloque alimentos quentes direto nela.",
+            ],
+            tv: [
+              "Desligue a TV da tomada quando não estiver em uso.",
+              "Use o timer de desligamento automático.",
+              "Evite deixá-la ligada como “som de fundo”.",
+            ],
+          };
+
+          document
+            .getElementById("form-calculadora")
+            .addEventListener("submit", function (e) {
+              e.preventDefault();
+
+              const equipamento = document.getElementById("equipamento").value;
+              const horas = parseFloat(document.getElementById("tempo").value);
+              const emergiaDiaria = emergiaBase[equipamento] || 0;
+              const totalEmergia = emergiaDiaria * horas;
+
+              const resumoTexto = `Você usa o seu <b>${equipamento}</b> por <b>${horas}h/dia</b>, o que equivale a um consumo estimado de <b>${totalEmergia.toLocaleString()} sej/dia</b>. Essa energia é equivalente à soma de todas as etapas envolvidas para que esse equipamento funcione, como produção, transporte, consumo e descarte.`;
+
+              document.getElementById("resumo").innerHTML = resumoTexto;
+
+              const dicas = dicasPorEquipamento[equipamento];
+              const listaDicas = document.getElementById("dicas");
+              listaDicas.innerHTML = "";
+              dicas.forEach((dica) => {
+                const li = document.createElement("li");
+                li.textContent = dica;
+                listaDicas.appendChild(li);
+              });
+
+              document.getElementById("resultado").style.display = "block";
+            });
+        </script>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      // Fade-in nas seções
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
+
+      // Modo escuro com persistência
+      const body = document.body;
+      const toggleBtn = document.getElementById("toggle-dark");
+
+      // Checa se o modo escuro foi ativado anteriormente e aplica
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
+      } else {
+        toggleBtn.textContent = "🌙 Modo Escuro"; // Se não estiver no modo escuro
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+
+        // Atualiza o texto do botão conforme o modo
+        if (isDark) {
+          toggleBtn.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+        } else {
+          toggleBtn.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+        }
+      });
+    </script>
+  </body>
+</html>
