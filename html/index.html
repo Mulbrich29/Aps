@@ -6,24 +6,19 @@
     <title>Emergia - Início</title>
     <link rel="stylesheet" href="/css/style.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #000;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
       header {
         background-color: #40916c;
         color: white;
         padding: 20px 0;
         text-align: center;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       nav ul {
+        flex-wrap: wrap;
         list-style: none;
         padding: 0;
         display: flex;
@@ -56,33 +51,10 @@
         opacity: 0;
         transform: translateY(20px);
       }
-
       section.fade-in {
         opacity: 1;
         transform: translateY(0);
       }
-
-      footer {
-        background-color: #40916c;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-      }
-
-      #toggle-dark {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 6px 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #f4f4f4;
-        color: #000;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
       body.dark-mode {
         background-color: #121212;
         color: #f4f4f4;
@@ -107,7 +79,7 @@
           <li><a href="index.html">Início</a></li>
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="aplicacoes.html">Aplicações</a></li>
-          <li><a href="sustentabilidade.html">No Campus</a></li>
+          <li><a href="nocampus.html">No Campus</a></li>
         </ul>
       </nav>
       <button id="toggle-dark">🌙 Modo Escuro</button>
@@ -138,16 +110,17 @@
     </main>
 
     <footer>
-      <p>&copy; 2025 - APS PWR | UNIP</p>
+      <p><strong>&copy; 2025 - APS PWR | UNIP</strong></p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+      // link dos graficos
+    </script>
     <script>
       // Modo escuro
       const toggleBtn = document.getElementById("toggle-dark");
       const body = document.body;
 
-      // Verifica se o modo escuro está ativado no localStorage
+      // Verifica se o modo escuro está ativado ou n
       if (localStorage.getItem("dark-mode") === "true") {
         body.classList.add("dark-mode");
         toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
