@@ -159,76 +159,6 @@ footer {
   font-size: 0.9rem;
   border-top: 4px solid #1b4332;
 }
-=======
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Inter", sans-serif;
-  line-height: 1.6;
-  background-color: #f0f4f8;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-header {
-  background: linear-gradient(90deg, #2d6a4f, #40916c);
-  color: white;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-
-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-#toggle-dark {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-  background-color: white;
-  color: #2d6a4f;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#toggle-dark:hover {
-  background-color: #e9ecef;
-}
 
 /* CENTRALIZAÇÃO GERAL */
 main {
@@ -317,4 +247,3 @@ footer {
   font-size: 0.9rem;
   border-top: 4px solid #1b4332;
 }
->>>>>>> c76fb50544045c8ef6d9ec16d5a620bc57a48668
