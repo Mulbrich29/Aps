@@ -51,9 +51,7 @@ nav a:hover {
 }
 
 #toggle-dark {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
+  margin-top: 1rem;
   background-color: white;
   color: #2d6a4f;
   border: none;
@@ -62,6 +60,12 @@ nav a:hover {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  align-self: center;
+}
+
+.dark-mode #toggle-dark {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
 }
 
 #toggle-dark:hover {

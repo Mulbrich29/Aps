@@ -6,29 +6,19 @@
     <title>Emergia - No Campus</title>
     <link rel="stylesheet" href="/css/style.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #000;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      body.dark-mode {
-        background-color: #121212;
-        color: #e0e0e0;
-      }
-
       header {
         background-color: #40916c;
         color: white;
         padding: 20px 0;
         text-align: center;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
-      header nav ul {
+      nav ul {
+        flex-wrap: wrap;
         list-style: none;
         padding: 0;
         display: flex;
@@ -36,38 +26,14 @@
         margin: 0;
       }
 
-      header nav ul li {
+      nav ul li {
         margin: 0 10px;
       }
 
-      header nav ul li a {
+      nav ul li a {
         color: white;
         text-decoration: none;
         font-weight: bold;
-        transition: color 0.3s ease;
-      }
-
-      header nav ul li a:hover {
-        color: #a8d0e6;
-      }
-
-      #toggle-dark {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 8px 12px;
-        border: none;
-        border-radius: 5px;
-        background-color: #f4f4f4;
-        color: #000;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      body.dark-mode #toggle-dark {
-        background-color: #f4f4f4;
-        color: #000;
       }
 
       main {
@@ -80,9 +46,10 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
         padding: 20px;
+        transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
+          transform 0.6s ease-out;
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
 
       section.fade-in {
@@ -90,16 +57,31 @@
         transform: translateY(0);
       }
 
+      #toggle-dark {
+        margin-top: 10px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
       body.dark-mode section {
         background-color: #1e1e1e;
         color: #f4f4f4;
       }
 
-      footer {
-        background-color: #40916c;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
+      body.dark-mode #toggle-dark {
+        background-color: #f4f4f4;
+        color: #000;
       }
     </style>
   </head>
@@ -138,7 +120,21 @@
     </footer>
 
     <script>
-      // Fade-in nas seções
+      const toggle = document.getElementById("toggle-dark");
+      const prefersDark = localStorage.getItem("dark-mode") === "true";
+
+      if (prefersDark) {
+        document.body.classList.add("dark-mode");
+        toggle.textContent = "🌞 Modo Claro";
+      }
+
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      });
+
       const fadeInSections = () => {
         const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
@@ -151,30 +147,6 @@
 
       window.addEventListener("load", fadeInSections);
       window.addEventListener("scroll", fadeInSections);
-
-      // Modo escuro com persistência
-      const body = document.body;
-      const toggleBtn = document.getElementById("toggle-dark");
-
-      // Checa se o modo escuro foi ativado anteriormente e aplica
-      if (localStorage.getItem("dark-mode") === "true") {
-        body.classList.add("dark-mode");
-        toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
-      } else {
-        toggleBtn.textContent = "🌙 Modo Escuro"; // Se não estiver no modo escuro
-      }
-
-      toggleBtn.addEventListener("click", () => {
-        const isDark = body.classList.toggle("dark-mode");
-        localStorage.setItem("dark-mode", isDark);
-
-        // Atualiza o texto do botão conforme o modo
-        if (isDark) {
-          toggleBtn.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
-        } else {
-          toggleBtn.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
-        }
-      });
     </script>
   </body>
 </html>

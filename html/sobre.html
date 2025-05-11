@@ -6,25 +6,50 @@
     <title>Emergia - Sobre</title>
     <link rel="stylesheet" href="/css/style.css" />
     <style>
-      main {
-        padding: 2rem;
+      header {
+        background-color: #40916c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
       }
 
       section {
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        max-width: 800px;
-        width: 100%;
-        opacity: 0;
-        transform: translateY(20px);
+        margin-bottom: 20px;
+        padding: 20px;
         transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
           transform 0.6s ease-out;
+        opacity: 0;
+        transform: translateY(20px);
       }
 
       section.fade-in {
@@ -32,34 +57,17 @@
         transform: translateY(0);
       }
 
-      .dark-mode section {
+      body.dark-mode {
+        background-color: #121212;
+        color: #f4f4f4;
+      }
+
+      body.dark-mode section {
         background-color: #1e1e1e;
         color: #f4f4f4;
       }
 
-      footer {
-        background-color: #2d6a4f;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-        margin-top: auto;
-      }
-
-      #toggle-dark {
-        position: absolute;
-        right: 1.5rem;
-        top: 1.5rem;
-        background-color: white;
-        color: #2d6a4f;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .dark-mode #toggle-dark {
+      body.dark-mode #toggle-dark {
         background-color: #f4f4f4;
         color: #000;
       }
@@ -114,26 +122,32 @@
     </main>
 
     <footer>
-      <p><strong>&copy; 2025 - APS PWR | UNIP</strong></p>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
     </footer>
 
     <script>
-      const toggleBtn = document.getElementById("toggle-dark");
-      const body = document.body;
+      // Modo escuro com persistência no localStorage
+      const toggle = document.getElementById("toggle-dark");
+      const prefersDark = localStorage.getItem("dark-mode") === "true";
 
-      if (localStorage.getItem("dark-mode") === "true") {
-        body.classList.add("dark-mode");
-        toggleBtn.textContent = "🌞 Modo Claro";
-      } else {
-        toggleBtn.textContent = "🌙 Modo Escuro";
+      if (prefersDark) {
+        document.body.classList.add("dark-mode");
       }
 
-      toggleBtn.addEventListener("click", () => {
-        const isDarkMode = body.classList.toggle("dark-mode");
-        localStorage.setItem("dark-mode", isDarkMode);
-        toggleBtn.textContent = isDarkMode ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+
+        // Atualiza o texto do botão conforme o modo
+        if (isDark) {
+          toggle.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+        } else {
+          toggle.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+        }
       });
 
+      // Fade-in das seções
       const fadeInSections = () => {
         const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
