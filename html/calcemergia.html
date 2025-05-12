@@ -6,93 +6,31 @@
     <title>Emergia - No Campus</title>
     <link rel="stylesheet" href="/css/style.css" />
     <style>
-      header {
-        background-color: #40916c;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+  select {
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    height: auto;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 0.25rem;
+    margin: 8px 0px 16px;
+    background-color: #fff;
+    color: #000;
+    transition: all 0.3s ease-in-out;
+  }
 
-      nav ul {
-        flex-wrap: wrap;
-        list-style: none;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        margin: 0;
-      }
+  body.dark-mode select {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #555;
+  }
+</style>
 
-      nav ul li {
-        margin: 0 10px;
-      }
-
-      nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      main {
-        padding: 20px;
-      }
-
-      section {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        padding: 20px;
-        transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
-          transform 0.6s ease-out;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      section.fade-in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      body.dark-mode {
-        background-color: #121212;
-        color: #f4f4f4;
-      }
-
-      body.dark-mode section {
-        background-color: #1e1e1e;
-        color: #f4f4f4;
-      }
-
-      body.dark-mode #toggle-dark {
-        background-color: #f4f4f4;
-        color: #000;
-      }
-      #equipamento{
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-        border: 1px solid #555;
-      }
-      select{
-         position: relative;
-         font-size: 1rem;
-         line-height: 1.5;
-         cursor: pointer;
-         user-select: none;
-         width: 100%;
-         height: auto;
-         padding: 0.75rem 1.25rem;
-         border: 1px solid #555;
-         outline: none;
-         border-radius: 0.25rem;
-         padding: 9.6px 16px;
-         margin: 8px 0px 16px;   
-         transition: all 0.3s ease-in-out;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -123,39 +61,23 @@
         <div>
           <div class="container">
             <div class="bg-white rounded-4 shadow-lg p-4 p-md-5">
-              <h2 class="fw-bold mb-3 text-center text-success">
-                A Calculadora de Emergia e o Novo Estilo de Vida Sustentável
-              </h2>
-              <p class="text-muted mb-4">
-                Vivemos em uma era em que pequenas escolhas tem grandes
-                impactos. A <b>Calculadora de Emergia</b> surge como uma aliada
-                no dia a dia de quem deseja viver de forma mais consiente,
-                transformando hábitos simples em ações sustentáveis
-              </p>
-              <p class="text-muted mb-4">
-                Ao utilizar dessa ferramenta, você passa a compreender, de forma
-                prática e humanizada, o <b>consumo energético real</b>
-                de aparelhos comuns, como notebooks, geladeiras e televisões.
-                Mais do que apenas números ele traduz o impacto ambiental desses
-                usos em termos acessíveis, revelando o caminho que a energia
-                percorre desde sua origem até o descarte final dos produtos
-              </p>
-              <p class="text-muted mb-4">
-                Com base nas Informações inseridas, a calculadora oferece
-                <b>dicas personalizadas</b> para reduzir esse consumo e
-                minimizar danos ao meio ambiente. Assim ela deixa de ser uma
-                ferramenta de cálculo e se torna uma ponte para um
-                <b>novo lifestyle</b> - mais consiente, equilibrado e
-                responsável
-              </p>
-              <p class="text-muted mb-4">
-                Integrar a calculadora de emergia à sua rotina significa
-                despertar para um novo olhar sobre o consumo e as escolhas
-                diárias. Significa assumir o controle de sua pegada ecológica e
-                fazer parte de uma geração que entende que sustentabilidade
-                começa dentro de casa - e se reflete no mundo inteiro.
-              </p>
-            </div>
+  <h2 class="fw-bold mb-3 text-center text-success">
+    A Calculadora de Emergia e um Novo Estilo de Vida
+  </h2>
+  <p class="text-muted mb-4">
+    A <b>Calculadora de Emergia</b> é uma ferramenta prática que ajuda você a
+    entender o impacto do consumo de aparelhos como notebooks e geladeiras de forma clara e acessível.
+  </p>
+  <p class="text-muted mb-4">
+    Mais que números, ela mostra o caminho da energia e oferece <b>dicas personalizadas</b>
+    para reduzir o consumo e adotar hábitos mais sustentáveis.
+  </p>
+  <p class="text-muted mb-4">
+    Ao usar a calculadora, você assume o controle da sua <b>pegada ecológica</b>
+    e dá o primeiro passo para um estilo de vida mais consciente e responsável.
+  </p>
+</div>
+
           </div>
         </div>
       </section>

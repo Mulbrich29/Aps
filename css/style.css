@@ -26,6 +26,9 @@ header {
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 nav ul {
@@ -35,6 +38,17 @@ nav ul {
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 nav a {
@@ -87,12 +101,35 @@ section {
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, opacity 0.6s ease-out,
+    transform 0.6s ease-out;
   width: 100%;
   max-width: 800px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* MODO ESCURO PARA SECTION */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f4f4f4;
 }
 
-/* MODO ESCURO PARA SECTION */
+body.dark-mode section {
+  background-color: #1e1e1e;
+  color: #f4f4f4;
+}
+
+body.dark-mode #toggle-dark {
+  background-color: #f4f4f4;
+  color: #000;
+}
+
 .dark-mode section {
   background-color: #1e1e1e;
   color: #f1f1f1;
@@ -159,16 +196,6 @@ footer {
   font-size: 0.9rem;
   border-top: 4px solid #1b4332;
 }
-
-/* CENTRALIZAÇÃO GERAL */
-main {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
 /* LIMITE DE LARGURA DAS SECTIONS */
 section {
   background-color: white;
