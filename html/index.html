@@ -17,6 +17,38 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+          <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+
+          <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll(
+                "main, h2, p, img, script"
+              );
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
         </ul>
       </nav>
       <button id="toggle-dark">🌙 Modo Escuro</button>
@@ -128,4 +160,4 @@
 <!-- contarste de cores e mudanças no tamanho dos txt (não tem)-->
 <!-- ascessibilidade ao uasr tab e avega pela  pagina e funcionadno com o enter(Funciona) -->
 <!-- Indicar o que pode fazer e cada labell e o que ela aceita por exemplos o d selecionar o dispositivo e um horario x de uso -->
-<!-- partes selcionadads corretamente e text exlicativo por enxemplo o inicio ao apertar o botao e direcionado automaticamente ao inicio e tem um titulo explicativo sobre e tambem as partes mais importante ee onde deve ser fazer a varredura com os olhos do leitor e depoi ele faz a real leitura do conteudo(Leitura seletiva)(Já possui porem falta melhorar) -->
+<!-- partes selcionadads corretamente e text exlicativo por enxemplo o inicio ao apertar o botao Se direcionado automaticamente ao inicio e tem um titulo explicativo sobre e tambem as partes mais importante ee onde deve ser fazer a varredura com os olhos do leitor e depoi ele faz a real leitura do conteudo(Leitura seletiva)(Já possui porem falta melhorar) -->

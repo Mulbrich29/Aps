@@ -188,13 +188,13 @@ canvas {
 
 /* RODAPÉ */
 footer {
+  display: block;
   background-color: #2d6a4f;
   color: white;
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
   font-size: 0.9rem;
-  border-top: 4px solid #1b4332;
 }
 /* LIMITE DE LARGURA DAS SECTIONS */
 section {
@@ -262,15 +262,4 @@ button:hover {
 canvas {
   margin-top: 1rem;
   max-width: 100%;
-}
-
-/* RODAPÉ */
-footer {
-  background-color: #2d6a4f;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  border-top: 4px solid #1b4332;
 }
