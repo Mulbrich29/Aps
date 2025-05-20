@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - Aplicações</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Aplicações da Emergia</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="nocampus.html">No Campus</a></li>
+          <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+          <ul>
+            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+          </ul>
+          <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll("main, h2, p, img");
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+      <section>
+        <h2>Planejamento Energético</h2>
+        <p>
+          Emergia é usada para avaliar diferentes fontes de energia e seus
+          impactos ambientais e econômicos, ajudando na escolha de opções mais
+          sustentáveis.
+        </p>
+      </section>
+
+      <section>
+        <h2>Avaliação de Sustentabilidade</h2>
+        <p>
+          Pode-se aplicar emergia para medir a sustentabilidade de sistemas
+          produtivos, como agricultura, indústrias e serviços.
+        </p>
+      </section>
+
+      <section>
+        <h2>Gestão de Recursos Naturais</h2>
+        <p>
+          A análise emergética permite entender o valor real de recursos como
+          água, solo e biodiversidade, promovendo uma gestão mais equilibrada.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("toggle-dark");
+      const prefersDark = localStorage.getItem("dark-mode") === "true";
+
+      if (prefersDark) {
+        document.body.classList.add("dark-mode");
+        toggle.textContent = "🌞 Modo Claro";
+      }
+
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      });
+
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
+    </script>
+  </body>
+</html>

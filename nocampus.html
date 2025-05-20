@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - No Campus</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Sustentabilidade no Campus</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="nocampus.html">No Campus</a></li>
+          <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+          <ul>
+            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+          </ul>
+          <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll("main, h2, p, img");
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
+        </ul>
+      </nav>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+      <section>
+        <h2>Iniciativas Sustentáveis</h2>
+        <p>
+          Conheça as ações sustentáveis que estão sendo implementadas no campus.
+        </p>
+      </section>
+      <section>
+        <h2>Projetos de Energia Renovável</h2>
+        <p>
+          A energia solar e outras fontes renováveis são utilizadas para
+          melhorar a eficiência energética no campus.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - APS PWR | UNIP</p>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("toggle-dark");
+      const prefersDark = localStorage.getItem("dark-mode") === "true";
+
+      if (prefersDark) {
+        document.body.classList.add("dark-mode");
+        toggle.textContent = "🌞 Modo Claro";
+      }
+
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dark-mode", isDark);
+        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      });
+
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
+    </script>
+  </body>
+</html>
