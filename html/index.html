@@ -17,14 +17,13 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
-          <button id="btnAcessibilidade">🔊 Acessibilidade</button>
-
+          <ul>
+            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+          </ul>
           <script>
             function lerConteudoDaPagina() {
               // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
-              const elementos = document.querySelectorAll(
-                "main, h2, p, img, script"
-              );
+              const elementos = document.querySelectorAll("main, h2, p, img");
 
               let textoCompleto = "";
 

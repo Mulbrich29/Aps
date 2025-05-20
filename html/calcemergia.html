@@ -40,8 +40,39 @@
           <li><a href="index.html">Início</a></li>
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="aplicacoes.html">Aplicações</a></li>
-          <li><a href="nocampus.html  ">No Campus</a></li>
+          <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+          <ul>
+            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+          </ul>
+          <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll("main, h2, p, img");
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
         </ul>
       </nav>
       <button id="toggle-dark">🌙 Modo Escuro</button>
