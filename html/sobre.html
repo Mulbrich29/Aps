@@ -65,21 +65,23 @@
 
     <script>
       // Acessibilidade: leitura do conteúdo
-      document.getElementById("btnAcessibilidade").addEventListener("click", () => {
-        const elementos = document.querySelectorAll("main, h2, p, img");
-        let textoCompleto = "";
-        elementos.forEach((el) => {
-          if (el.tagName === "IMG" && el.alt) {
-            textoCompleto += `Imagem: ${el.alt}. `;
-          } else if (el.innerText.trim() !== "") {
-            textoCompleto += el.innerText + ". ";
-          }
+      document
+        .getElementById("btnAcessibilidade")
+        .addEventListener("click", () => {
+          const elementos = document.querySelectorAll("main, h2, p, img");
+          let textoCompleto = "";
+          elementos.forEach((el) => {
+            if (el.tagName === "IMG" && el.alt) {
+              textoCompleto += `Imagem: ${el.alt}. `;
+            } else if (el.innerText.trim() !== "") {
+              textoCompleto += el.innerText + ". ";
+            }
+          });
+          const utterance = new SpeechSynthesisUtterance(textoCompleto);
+          utterance.lang = "pt-BR";
+          speechSynthesis.cancel();
+          speechSynthesis.speak(utterance);
         });
-        const utterance = new SpeechSynthesisUtterance(textoCompleto);
-        utterance.lang = "pt-BR";
-        speechSynthesis.cancel();
-        speechSynthesis.speak(utterance);
-      });
 
       // Modo escuro
       const toggle = document.getElementById("toggle-dark");

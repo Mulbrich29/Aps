@@ -43,8 +43,15 @@
 
       <!-- Botões agrupados em div para layout igual -->
       <div class="header-buttons">
-        <button id="btnAcessibilidade" aria-label="Ativar acessibilidade por voz">🔊 Acessibilidade</button>
-        <button id="toggle-dark" aria-label="Alternar modo escuro">🌙 Modo Escuro</button>
+        <button
+          id="btnAcessibilidade"
+          aria-label="Ativar acessibilidade por voz"
+        >
+          🔊 Acessibilidade
+        </button>
+        <button id="toggle-dark" aria-label="Alternar modo escuro">
+          🌙 Modo Escuro
+        </button>
       </div>
     </header>
 
@@ -149,23 +156,25 @@
       window.addEventListener("scroll", fadeInSections);
 
       // Acessibilidade por voz
-      document.getElementById("btnAcessibilidade").addEventListener("click", () => {
-        const elementos = document.querySelectorAll("main, h2, p, img");
-        let textoCompleto = "";
+      document
+        .getElementById("btnAcessibilidade")
+        .addEventListener("click", () => {
+          const elementos = document.querySelectorAll("main, h2, p, img");
+          let textoCompleto = "";
 
-        elementos.forEach((el) => {
-          if (el.tagName === "IMG" && el.alt) {
-            textoCompleto += `Imagem: ${el.alt}. `;
-          } else if (el.innerText.trim() !== "") {
-            textoCompleto += el.innerText + ". ";
-          }
+          elementos.forEach((el) => {
+            if (el.tagName === "IMG" && el.alt) {
+              textoCompleto += `Imagem: ${el.alt}. `;
+            } else if (el.innerText.trim() !== "") {
+              textoCompleto += el.innerText + ". ";
+            }
+          });
+
+          const utterance = new SpeechSynthesisUtterance(textoCompleto);
+          utterance.lang = "pt-BR";
+          speechSynthesis.cancel();
+          speechSynthesis.speak(utterance);
         });
-
-        const utterance = new SpeechSynthesisUtterance(textoCompleto);
-        utterance.lang = "pt-BR";
-        speechSynthesis.cancel();
-        speechSynthesis.speak(utterance);
-      });
     </script>
   </body>
 </html>
