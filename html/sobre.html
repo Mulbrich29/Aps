@@ -16,13 +16,40 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+          <ul>
+            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+          </ul>
+          <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll("main, h2, p, img");
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
         </ul>
       </nav>
-
-      <div class="header-buttons">
-        <button id="btnAcessibilidade">🔊 Acessibilidade</button>
-        <button id="toggle-dark">🌙 Modo Escuro</button>
-      </div>
+      <button id="toggle-dark">🌙 Modo Escuro</button>
     </header>
 
     <main>
@@ -64,45 +91,35 @@
     </footer>
 
     <script>
-      // Acessibilidade: leitura do conteúdo
-      document
-        .getElementById("btnAcessibilidade")
-        .addEventListener("click", () => {
-          const elementos = document.querySelectorAll("main, h2, p, img");
-          let textoCompleto = "";
-          elementos.forEach((el) => {
-            if (el.tagName === "IMG" && el.alt) {
-              textoCompleto += `Imagem: ${el.alt}. `;
-            } else if (el.innerText.trim() !== "") {
-              textoCompleto += el.innerText + ". ";
-            }
-          });
-          const utterance = new SpeechSynthesisUtterance(textoCompleto);
-          utterance.lang = "pt-BR";
-          speechSynthesis.cancel();
-          speechSynthesis.speak(utterance);
-        });
-
       // Modo escuro
-      const toggle = document.getElementById("toggle-dark");
+      const toggleBtn = document.getElementById("toggle-dark");
+      const body = document.body;
+
+      // Verifica se o modo escuro está ativado ou n
       if (localStorage.getItem("dark-mode") === "true") {
-        document.body.classList.add("dark-mode");
-        toggle.textContent = "🌞 Modo Claro";
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
+      } else {
+        toggleBtn.textContent = "🌙 Modo Escuro"; // Se não estiver no modo escuro
       }
 
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        const isDark = document.body.classList.contains("dark-mode");
-        localStorage.setItem("dark-mode", isDark);
-        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
-      });
+      toggleBtn.addEventListener("click", () => {
+        const isDarkMode = body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", isDarkMode);
 
-      // Fade-in de seções e artigos
+        // Atualiza o texto do botão conforme o modo
+        if (isDarkMode) {
+          toggleBtn.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+        } else {
+          toggleBtn.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+        }
+      });
+      // Fade-in das seções
       const fadeInSections = () => {
-        const sections = document.querySelectorAll("section, article");
+        const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
-          const top = section.getBoundingClientRect().top;
-          if (top < window.innerHeight - 50) {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
             section.classList.add("fade-in");
           }
         });
