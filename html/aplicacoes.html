@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emergia - Aplicações</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      /* Responsividade: no mobile pequenos, botões podem encolher */
+      @media (max-width: 400px) {
+        .header-buttons {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .header-buttons button {
+          width: 100%;
+          padding: 10px 0;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -16,40 +30,14 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
-          <ul>
-            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
-          </ul>
-          <script>
-            function lerConteudoDaPagina() {
-              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
-              const elementos = document.querySelectorAll("main, h2, p, img");
-
-              let textoCompleto = "";
-
-              elementos.forEach((el) => {
-                if (el.tagName === "IMG") {
-                  const altText = el.alt;
-                  if (altText) {
-                    textoCompleto += `Imagem: ${altText}. `;
-                  }
-                } else if (el.innerText.trim() !== "") {
-                  textoCompleto += el.innerText + ". ";
-                }
-              });
-
-              const utterance = new SpeechSynthesisUtterance(textoCompleto);
-              utterance.lang = "pt-BR";
-              speechSynthesis.cancel();
-              speechSynthesis.speak(utterance);
-            }
-
-            document
-              .getElementById("btnAcessibilidade")
-              .addEventListener("click", lerConteudoDaPagina);
-          </script>
         </ul>
       </nav>
-      <button id="toggle-dark">🌙 Modo Escuro</button>
+
+      <!-- Botões agrupados para manter padrão -->
+      <div class="header-buttons">
+        <button id="btnAcessibilidade" aria-label="Ativar acessibilidade por voz">🔊 Acessibilidade</button>
+        <button id="toggle-dark" aria-label="Alternar modo escuro">🌙 Modo Escuro</button>
+      </div>
     </header>
 
     <main>
@@ -80,25 +68,29 @@
     </main>
 
     <footer>
-      <p>&copy; 2025 - APS PWR | UNIP</p>
+      <p><strong>&copy; 2025 - APS PWR | UNIP</strong></p>
     </footer>
 
     <script>
-      const toggle = document.getElementById("toggle-dark");
-      const prefersDark = localStorage.getItem("dark-mode") === "true";
+      // Modo escuro
+      const toggleBtn = document.getElementById("toggle-dark");
+      const body = document.body;
 
-      if (prefersDark) {
-        document.body.classList.add("dark-mode");
-        toggle.textContent = "🌞 Modo Claro";
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "🌞 Modo Claro";
+      } else {
+        toggleBtn.textContent = "🌙 Modo Escuro";
       }
 
-      toggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-        const isDark = document.body.classList.contains("dark-mode");
-        localStorage.setItem("dark-mode", isDark);
-        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      toggleBtn.addEventListener("click", () => {
+        const isDarkMode = body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", isDarkMode);
+
+        toggleBtn.textContent = isDarkMode ? "🌞 Modo Claro" : "🌙 Modo Escuro";
       });
 
+      // Função fade-in para as seções
       const fadeInSections = () => {
         const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
@@ -111,6 +103,25 @@
 
       window.addEventListener("load", fadeInSections);
       window.addEventListener("scroll", fadeInSections);
+
+      // Acessibilidade por voz
+      document.getElementById("btnAcessibilidade").addEventListener("click", () => {
+        const elementos = document.querySelectorAll("main, h2, p, img");
+        let textoCompleto = "";
+
+        elementos.forEach((el) => {
+          if (el.tagName === "IMG" && el.alt) {
+            textoCompleto += `Imagem: ${el.alt}. `;
+          } else if (el.innerText.trim() !== "") {
+            textoCompleto += el.innerText + ". ";
+          }
+        });
+
+        const utterance = new SpeechSynthesisUtterance(textoCompleto);
+        utterance.lang = "pt-BR";
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      });
     </script>
   </body>
 </html>

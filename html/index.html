@@ -5,11 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emergia - Início</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <style></style>
+    <style>
+      /* Responsividade: no mobile pequenos, botões podem encolher */
+      @media (max-width: 400px) {
+        .header-buttons {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .header-buttons button {
+          width: 100%;
+          padding: 10px 0;
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Centralizar imagem (classe já usada) */
+      img.center {
+        display: block;
+        margin: 1rem auto;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
     <header>
-      <h1>Emergia e Sustentabilidade</h1>
+      <h1>Emergia</h1>
       <nav>
         <ul>
           <li><a href="index.html">Início</a></li>
@@ -17,40 +38,14 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
-          <ul>
-            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
-          </ul>
-          <script>
-            function lerConteudoDaPagina() {
-              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
-              const elementos = document.querySelectorAll("main, h2, p, img");
-
-              let textoCompleto = "";
-
-              elementos.forEach((el) => {
-                if (el.tagName === "IMG") {
-                  const altText = el.alt;
-                  if (altText) {
-                    textoCompleto += `Imagem: ${altText}. `;
-                  }
-                } else if (el.innerText.trim() !== "") {
-                  textoCompleto += el.innerText + ". ";
-                }
-              });
-
-              const utterance = new SpeechSynthesisUtterance(textoCompleto);
-              utterance.lang = "pt-BR";
-              speechSynthesis.cancel();
-              speechSynthesis.speak(utterance);
-            }
-
-            document
-              .getElementById("btnAcessibilidade")
-              .addEventListener("click", lerConteudoDaPagina);
-          </script>
         </ul>
       </nav>
-      <button id="toggle-dark">🌙 Modo Escuro</button>
+
+      <!-- Botões agrupados em div para layout igual -->
+      <div class="header-buttons">
+        <button id="btnAcessibilidade" aria-label="Ativar acessibilidade por voz">🔊 Acessibilidade</button>
+        <button id="toggle-dark" aria-label="Alternar modo escuro">🌙 Modo Escuro</button>
+      </div>
     </header>
 
     <main>
@@ -67,8 +62,11 @@
           solar) utilizada na transformação de um recurso ou produto".
         </p>
         <img
-          src="img/emergia_vs_energia.png"
+          class="center"
+          src="/img/Emergia vs Energia Convencional.png"
           alt="Infográfico comparando emergia e energia convencional"
+          width="380"
+          height="900"
         />
       </section>
       <section>
@@ -80,35 +78,33 @@
     <footer>
       <p><strong>&copy; 2025 - APS PWR | UNIP</strong></p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js">
-      // link dos graficos
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       // Modo escuro
       const toggleBtn = document.getElementById("toggle-dark");
       const body = document.body;
 
-      // Verifica se o modo escuro está ativado ou n
+      // Verifica se o modo escuro está ativado ou não
       if (localStorage.getItem("dark-mode") === "true") {
         body.classList.add("dark-mode");
-        toggleBtn.textContent = "🌞 Modo Claro"; // Atualiza o texto do botão
+        toggleBtn.textContent = "🌞 Modo Claro";
       } else {
-        toggleBtn.textContent = "🌙 Modo Escuro"; // Se não estiver no modo escuro
+        toggleBtn.textContent = "🌙 Modo Escuro";
       }
 
       toggleBtn.addEventListener("click", () => {
         const isDarkMode = body.classList.toggle("dark-mode");
         localStorage.setItem("dark-mode", isDarkMode);
 
-        // Atualiza o texto do botão conforme o modo
         if (isDarkMode) {
-          toggleBtn.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
+          toggleBtn.textContent = "🌞 Modo Claro";
         } else {
-          toggleBtn.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
+          toggleBtn.textContent = "🌙 Modo Escuro";
         }
       });
 
-      // Gráfico de comparação - garantir que o gráfico seja desenhado após o carregamento da página
+      // Gráfico de comparação
       window.addEventListener("load", () => {
         const ctx = document.getElementById("graficoEmergia");
         if (ctx) {
@@ -148,15 +144,28 @@
           }
         });
       };
-      
+
       window.addEventListener("load", fadeInSections);
       window.addEventListener("scroll", fadeInSections);
+
+      // Acessibilidade por voz
+      document.getElementById("btnAcessibilidade").addEventListener("click", () => {
+        const elementos = document.querySelectorAll("main, h2, p, img");
+        let textoCompleto = "";
+
+        elementos.forEach((el) => {
+          if (el.tagName === "IMG" && el.alt) {
+            textoCompleto += `Imagem: ${el.alt}. `;
+          } else if (el.innerText.trim() !== "") {
+            textoCompleto += el.innerText + ". ";
+          }
+        });
+
+        const utterance = new SpeechSynthesisUtterance(textoCompleto);
+        utterance.lang = "pt-BR";
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      });
     </script>
   </body>
 </html>
-
-<!-- colocarr acessibilidade como: -->
-<!-- contarste de cores e mudanças no tamanho dos txt (não tem)-->
-<!-- ascessibilidade ao uasr tab e avega pela  pagina e funcionadno com o enter(Funciona) -->
-<!-- Indicar o que pode fazer e cada labell e o que ela aceita por exemplos o d selecionar o dispositivo e um horario x de uso -->
-<!-- partes selcionadads corretamente e text exlicativo por enxemplo o inicio ao apertar o botao Se direcionado automaticamente ao inicio e tem um titulo explicativo sobre e tambem as partes mais importante ee onde deve ser fazer a varredura com os olhos do leitor e depoi ele faz a real leitura do conteudo(Leitura seletiva)(Já possui porem falta melhorar) -->
