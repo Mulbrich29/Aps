@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 0.3s;
 }
 
 body {
@@ -17,6 +18,132 @@ body {
 .dark-mode {
   background-color: #121212;
   color: #e0e0e0;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.campus-iniciativas {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  text-align: left;
+}
+
+.campus-iniciativas h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.iniciativa {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.iniciativa:hover {
+  transform: scale(1.02);
+}
+
+.iniciativa h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.iniciativa ul {
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.iniciativa li {
+  margin-bottom: 0.5rem;
+}
+
+.campus-analise {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  text-align: left;
+}
+
+.campus-analise h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.analise-bloco {
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.analise-bloco h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.nota {
+  border-left: 5px solid #ffb400;
+  border-right: 5px solid #ffb400;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  font-style: italic;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+th,
+td {
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Força a tabela a ultrapassar a largura da tela, ativando scroll */
+.table-responsive table {
+  min-width: 600px; /* pode ajustar esse valor conforme o conteúdo */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-responsive th,
+.table-responsive td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ccc;
+  white-space: nowrap;
+}
+
+/* Estilo de fallback para telas pequenas */
+@media screen and (max-width: 480px) {
+  .table-responsive table {
+    font-size: 0.85rem;
+  }
+
+  .analise-bloco h3 {
+    font-size: 1rem;
+  }
 }
 
 header {
@@ -188,13 +315,13 @@ canvas {
 
 /* RODAPÉ */
 footer {
+  display: block;
   background-color: #2d6a4f;
   color: white;
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
   font-size: 0.9rem;
-  border-top: 4px solid #1b4332;
 }
 /* LIMITE DE LARGURA DAS SECTIONS */
 section {
@@ -263,14 +390,15 @@ canvas {
   margin-top: 1rem;
   max-width: 100%;
 }
-
-/* RODAPÉ */
-footer {
-  background-color: #2d6a4f;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  border-top: 4px solid #1b4332;
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+    text-align: center;
+  }
+  th,
+  td {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
 }

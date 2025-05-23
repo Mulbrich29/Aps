@@ -18,7 +18,11 @@
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
         </ul>
       </nav>
-      <button id="toggle-dark">🌙 Modo Escuro</button>
+
+      <div class="header-buttons">
+        <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+        <button id="toggle-dark">🌙 Modo Escuro</button>
+      </div>
     </header>
 
     <main>
@@ -60,33 +64,45 @@
     </footer>
 
     <script>
-      // Modo escuro com persistência no localStorage
-      const toggle = document.getElementById("toggle-dark");
-      const prefersDark = localStorage.getItem("dark-mode") === "true";
+      // Acessibilidade: leitura do conteúdo
+      document
+        .getElementById("btnAcessibilidade")
+        .addEventListener("click", () => {
+          const elementos = document.querySelectorAll("main, h2, p, img");
+          let textoCompleto = "";
+          elementos.forEach((el) => {
+            if (el.tagName === "IMG" && el.alt) {
+              textoCompleto += `Imagem: ${el.alt}. `;
+            } else if (el.innerText.trim() !== "") {
+              textoCompleto += el.innerText + ". ";
+            }
+          });
+          const utterance = new SpeechSynthesisUtterance(textoCompleto);
+          utterance.lang = "pt-BR";
+          speechSynthesis.cancel();
+          speechSynthesis.speak(utterance);
+        });
 
-      if (prefersDark) {
+      // Modo escuro
+      const toggle = document.getElementById("toggle-dark");
+      if (localStorage.getItem("dark-mode") === "true") {
         document.body.classList.add("dark-mode");
+        toggle.textContent = "🌞 Modo Claro";
       }
 
       toggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
         const isDark = document.body.classList.contains("dark-mode");
         localStorage.setItem("dark-mode", isDark);
-
-        // Atualiza o texto do botão conforme o modo
-        if (isDark) {
-          toggle.textContent = "🌞 Modo Claro"; // Exibe modo claro no botão
-        } else {
-          toggle.textContent = "🌙 Modo Escuro"; // Exibe modo escuro no botão
-        }
+        toggle.textContent = isDark ? "🌞 Modo Claro" : "🌙 Modo Escuro";
       });
 
-      // Fade-in das seções
+      // Fade-in de seções e artigos
       const fadeInSections = () => {
-        const sections = document.querySelectorAll("section");
+        const sections = document.querySelectorAll("section, article");
         sections.forEach((section) => {
-          const sectionTop = section.getBoundingClientRect().top;
-          if (sectionTop < window.innerHeight - 50) {
+          const top = section.getBoundingClientRect().top;
+          if (top < window.innerHeight - 50) {
             section.classList.add("fade-in");
           }
         });
