@@ -42,42 +42,14 @@
           <li><a href="aplicacoes.html">Aplicações</a></li>
           <li><a href="nocampus.html">No Campus</a></li>
           <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
-          <ul>
-            <button id="btnAcessibilidade">🔊 Acessibilidade</button>
-          </ul>
-          <script>
-            function lerConteudoDaPagina() {
-              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
-              const elementos = document.querySelectorAll("main, h2, p, img");
-
-              let textoCompleto = "";
-
-              elementos.forEach((el) => {
-                if (el.tagName === "IMG") {
-                  const altText = el.alt;
-                  if (altText) {
-                    textoCompleto += `Imagem: ${altText}. `;
-                  }
-                } else if (el.innerText.trim() !== "") {
-                  textoCompleto += el.innerText + ". ";
-                }
-              });
-
-              const utterance = new SpeechSynthesisUtterance(textoCompleto);
-              utterance.lang = "pt-BR";
-              speechSynthesis.cancel();
-              speechSynthesis.speak(utterance);
-            }
-
-            document
-              .getElementById("btnAcessibilidade")
-              .addEventListener("click", lerConteudoDaPagina);
-          </script>
         </ul>
       </nav>
-      <button id="toggle-dark">🌙 Modo Escuro</button>
+      <!-- Botões agrupados em div para layout igual -->
+      <div class="header-buttons">
+        <button id="btnAcessibilidade">🔊 Acessibilidade</button>
+        <button id="toggle-dark">🌙 Modo Escuro</button>
+      </div>
     </header>
-
     <main>
         <!-- Título centralizado -->
         <div class="position-absolute top-50 start-50 translate-middle z-2">
@@ -162,6 +134,34 @@
             </div>
           </div>
         </div>
+        <script>
+            function lerConteudoDaPagina() {
+              // Seleciona todos os elementos desejados, exceto o botão de acessibilidade
+              const elementos = document.querySelectorAll("main, h2, p, img");
+
+              let textoCompleto = "";
+
+              elementos.forEach((el) => {
+                if (el.tagName === "IMG") {
+                  const altText = el.alt;
+                  if (altText) {
+                    textoCompleto += `Imagem: ${altText}. `;
+                  }
+                } else if (el.innerText.trim() !== "") {
+                  textoCompleto += el.innerText + ". ";
+                }
+              });
+
+              const utterance = new SpeechSynthesisUtterance(textoCompleto);
+              utterance.lang = "pt-BR";
+              speechSynthesis.cancel();
+              speechSynthesis.speak(utterance);
+            }
+
+            document
+              .getElementById("btnAcessibilidade")
+              .addEventListener("click", lerConteudoDaPagina);
+          </script>
 
         <script>
           const emergiaBase = {
