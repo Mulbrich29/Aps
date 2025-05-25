@@ -1,1 +1,137 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emergia - Aplicações</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      /* Responsividade: no mobile pequenos, botões podem encolher */
+      @media (max-width: 400px) {
+        .header-buttons {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .header-buttons button {
+          width: 100%;
+          padding: 10px 0;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Aplicações da Emergia</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="aplicacoes.html">Aplicações</a></li>
+          <li><a href="nocampus.html">No Campus</a></li>
+          <li><a href="calcemergia.html">Calculadora de Emergia</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botões agrupados para manter padrão -->
+      <div class="header-buttons">
+        <button
+          id="btnAcessibilidade"
+          aria-label="Ativar acessibilidade por voz"
+        >
+          🔊 Acessibilidade
+        </button>
+        <button id="toggle-dark" aria-label="Alternar modo escuro">
+          🌙 Modo Escuro
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2>Planejamento Energético</h2>
+        <p>
+          Emergia é usada para avaliar diferentes fontes de energia e seus
+          impactos ambientais e econômicos, ajudando na escolha de opções mais
+          sustentáveis.
+        </p>
+      </section>
+
+      <section>
+        <h2>Avaliação de Sustentabilidade</h2>
+        <p>
+          Pode-se aplicar emergia para medir a sustentabilidade de sistemas
+          produtivos, como agricultura, indústrias e serviços.
+        </p>
+      </section>
+
+      <section>
+        <h2>Gestão de Recursos Naturais</h2>
+        <p>
+          A análise emergética permite entender o valor real de recursos como
+          água, solo e biodiversidade, promovendo uma gestão mais equilibrada.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>&copy; 2025 - APS PWR | UNIP</strong></p>
+    </footer>
+
+    <script>
+      // Modo escuro
+      const toggleBtn = document.getElementById("toggle-dark");
+      const body = document.body;
+
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "🌞 Modo Claro";
+      } else {
+        toggleBtn.textContent = "🌙 Modo Escuro";
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const isDarkMode = body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", isDarkMode);
+
+        toggleBtn.textContent = isDarkMode ? "🌞 Modo Claro" : "🌙 Modo Escuro";
+      });
+
+      // Função fade-in para as seções
+      const fadeInSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < window.innerHeight - 50) {
+            section.classList.add("fade-in");
+          }
+        });
+      };
+
+      window.addEventListener("load", fadeInSections);
+      window.addEventListener("scroll", fadeInSections);
+
+      // Acessibilidade por voz
+      document
+        .getElementById("btnAcessibilidade")
+        .addEventListener("click", () => {
+          const elementos = document.querySelectorAll("main, h2, p, img");
+          let textoCompleto = "";
+
+          elementos.forEach((el) => {
+            if (el.tagName === "IMG" && el.alt) {
+              textoCompleto += `Imagem: ${el.alt}. `;
+            } else if (el.innerText.trim() !== "") {
+              textoCompleto += el.innerText + ". ";
+            }
+          });
+
+          const utterance = new SpeechSynthesisUtterance(textoCompleto);
+          utterance.lang = "pt-BR";
+          speechSynthesis.cancel();
+          speechSynthesis.speak(utterance);
+        });
+    </script>
+  </body>
+</html>
